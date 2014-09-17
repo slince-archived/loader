@@ -14,6 +14,8 @@ abstract class AbstractPsrLoader extends AbstractLoader
      * @var array
      */
     protected $_prefixPaths = [];
+    
+    protected $_fallbackPaths = [];
 
     /**
      * 设置前缀和路径映射

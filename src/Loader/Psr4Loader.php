@@ -5,7 +5,7 @@
  */
 namespace Slince\Loader\Loader;
 
-class Psr4Loader extends AbstractLoader
+class Psr4Loader extends AbstractPsrLoader
 {
 
     /**
@@ -38,6 +38,7 @@ class Psr4Loader extends AbstractLoader
      */
     function findFile($class)
     {
+        //从设置的命名映射中获取类地址
         foreach ($this->_prefixPaths as $prefix => $paths) {
             if (strpos($class, $prefix) === 0) {
                 foreach ($paths as $path) {
@@ -47,6 +48,11 @@ class Psr4Loader extends AbstractLoader
                     }
                 }
             }
+        }
+        //如果在映射的地址库中找不到，则从备用目录中获取
+        $basePath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        foreach ($this->_fallbackPaths as $path) {
+            $classFile = $path . ) . '.php';
         }
         return false;
     }
