@@ -5,15 +5,8 @@
  */
 namespace Slince\Loader\Loader;
 
-class Psr0Loader extends AbstractLoader
+class Psr0Loader extends AbstractPsrLoader
 {
-
-    /**
-     * 命名空间和文件路径的映射
-     *
-     * @var array
-     */
-    private $_prefixPaths = [];
 
     /**
      * 设置前缀和路径映射
