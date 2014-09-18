@@ -21,13 +21,13 @@ class Factory
     {
         $instance = null;
         switch ($loaderType) {
-            case ClassLoader::TYPE_CLASSMAP:
+            case ClassLoader::CLASSMAP:
                 $instance = new Loader\ClassMapLoader();
                 break;
-            case ClassLoader::TYPE_PSR4:
+            case ClassLoader::PSR4:
                 $instance = new Loader\Psr4Loader();
                 break;
-            case ClassLoader::TYPE_PSR0:
+            case ClassLoader::PSR0:
                 $instance = new Loader\Psr0Loader();
                 break;
             default:

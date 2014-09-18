@@ -13,21 +13,21 @@ class ClassLoader
      *
      * @var string
      */
-    const TYPE_CLASSMAP = 'ClassMap';
+    const CLASSMAP = 'ClassMap';
 
     /**
      * psr4
      *
      * @var string
      */
-    const TYPE_PSR4 = 'Psr4';
+    const PSR4 = 'Psr4';
 
     /**
      * psr0
      *
      * @var string
      */
-    const TYPE_PSR0 = 'Psr0';
+    const PSR0 = 'Psr0';
 
     /**
      * 自定义加载器
@@ -78,25 +78,37 @@ class ClassLoader
     function registerNamespace($namespace, $path)
     {
         if (substr($namespace, - 1) === '\\') {
-            $this->_getLoader(self::TYPE_PSR4)->setPrefixPath($namespace, $path);
+            $this->_getLoader(self::PSR4)->setPrefixPath($namespace, $path);
         } else {
-            $this->_getLoader(self::TYPE_PSR0)->setPrefixPath($namespace, $path);
+            $this->_getLoader(self::PSR0)->setPrefixPath($namespace, $path);
         }
         return $this;
     }
 
     /**
-     * 批量注册命名空间
+     * 批量注册psr命名空间，区分psr类型
+     *
+     * @param array $namespaces            
+     * @param string $loaderType            
+     * @return \Slince\Loader\ClassLoader
+     */
+    function registerNamespaces(array $namespaces, $loaderType = self::PSR4)
+    {
+        $this->_getLoader($loaderType)->setPrefixPaths($namespaces);
+        return $this;
+    }
+
+    /**
+     * 批量注册psr命名空间，不区分类型
      *
      * @param array $namespaces            
      * @return ClassLoader
      */
-    function registerNamespaces(array $namespaces)
+    function registerPsrNamespaces(array $namespaces)
     {
         foreach ($namespaces as $namespace => $path) {
             $this->registerNamespace($namespace, $path);
         }
-        return $this;
     }
 
     /**
@@ -108,7 +120,7 @@ class ClassLoader
      */
     function registerClassMap($class, $file)
     {
-        $this->_getLoader(self::TYPE_CLASSMAP)->setClassMapping($class, $file);
+        $this->_getLoader(self::CLASSMAP)->setClassMapping($class, $file);
         return $this;
     }
 
@@ -120,7 +132,7 @@ class ClassLoader
      */
     function registerClassMaps(array $classMap)
     {
-        $this->_getLoader(self::TYPE_CLASSMAP)->setClassMappings($classMap);
+        $this->_getLoader(self::CLASSMAP)->setClassMappings($classMap);
         return $this;
     }
 
@@ -133,12 +145,12 @@ class ClassLoader
     function registerFromConfig($configs)
     {
         foreach ($configs as $key => $map) {
-            if (strcasecmp(ClassLoader::TYPE_CLASSMAP, $key) == 0) {
-                $this->_getLoader(self::TYPE_CLASSMAP)->setClassMappings($map);
-            } elseif (strcasecmp(ClassLoader::TYPE_PSR4, $key) == 0) {
-                $this->_getLoader(self::TYPE_PSR4)->setPrefixPaths($map);
-            } elseif (strcasecmp(ClassLoader::TYPE_PSR0, $key) == 0) {
-                $this->_getLoader(self::TYPE_PSR0)->setPrefixPaths($map);
+            if (strcasecmp(self::CLASSMAP, $key) == 0) {
+                $this->_getLoader(self::CLASSMAP)->setClassMappings($map);
+            } elseif (strcasecmp(self::PSR4, $key) == 0) {
+                $this->_getLoader(self::PSR4)->setPrefixPaths($map);
+            } elseif (strcasecmp(self::PSR0, $key) == 0) {
+                $this->_getLoader(self::PSR0)->setPrefixPaths($map);
             }
         }
         return $this;
