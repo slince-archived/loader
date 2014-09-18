@@ -28,22 +28,12 @@ class ClassMapLoader extends AbstractLoader
 
     /**
      * 批量设置映射
-     * 
+     *
      * @param array $classMapping            
      */
     function setClassMappings($classMapping)
     {
         $this->_classMap = array_merge($this->_classMap, $classMapping);
-    }
-
-    /**
-     * 获取映射
-     *
-     * @param string $class            
-     */
-    function getClassMapping($class)
-    {
-        return isset($this->_classMap[$class]) ? $this->_classMap[$class] : null;
     }
 
     /**

@@ -11,10 +11,9 @@ class Psr4Loader extends AbstractPsrLoader
 {
 
     /**
-     * 设置前缀和路径映射
-     *
-     * @param string $prefixPath            
-     * @param string|array $path            
+     * (non-PHPdoc)
+     * 
+     * @see \Slince\Loader\Loader\AbstractPsrLoader::setPrefixPath()
      */
     function setPrefixPath($prefixPath, $path)
     {

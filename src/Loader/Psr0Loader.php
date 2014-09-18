@@ -9,10 +9,8 @@ class Psr0Loader extends AbstractPsrLoader
 {
 
     /**
-     * 设置前缀和路径映射
-     *
-     * @param string $prefixPath            
-     * @param string|array $path            
+     * (non-PHPdoc)
+     * @see \Slince\Loader\Loader\AbstractPsrLoader::setPrefixPath()
      */
     function setPrefixPath($prefixPath, $path)
     {
@@ -38,8 +36,8 @@ class Psr0Loader extends AbstractPsrLoader
         foreach ($this->_prefixPaths as $prefix => $paths) {
             if (strpos($class, $prefix) === 0) {
                 foreach ($paths as $path) {
-                    $classFile = str_replace('\\', DIRECTORY_SEPARATOR, str_replace($prefix, $path, $class)) . '.php';
-                    $classFile = str_repace('_', DIRECTORY_SEPARATOR, $classFile);
+                    $classFile = str_replace('\\', DIRECTORY_SEPARATOR, str_replace($prefix, rtrim($path, '\\/'), $class)) . '.php';
+                    $classFile = str_replace('_', DIRECTORY_SEPARATOR, $classFile);
                     if (file_exists($classFile)) {
                         return $classFile;
                     }
