@@ -84,6 +84,17 @@ class ClassLoader
         return $this;
     }
 
+    function register()
+    {
+        $callback = function($class){
+            foreach ($this->_loaders as $loader) {
+                if ($loader->loadClass($class)) {
+                    break;
+                }
+            }
+        };
+        spl_autoload_register($callback);
+    }
     /**
      * 获取加载器
      *

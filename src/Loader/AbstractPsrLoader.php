@@ -15,27 +15,30 @@ abstract class AbstractPsrLoader extends AbstractLoader
      */
     protected $_prefixPaths = [];
     
+    /**
+     * 备用目录
+     * 
+     * @var array
+     */
     protected $_fallbackPaths = [];
 
     /**
-     * 设置前缀和路径映射
-     *
-     * @param string $prefixPath            
-     * @param string|array $path            
+     * 设置一个备用目录
+     * @param string $path
      */
-    function setPrefixPath($prefixPath, $path)
+    function setFallbackPath($path)
     {
-        if (! is_array($path)) {
-            $path = [
-                $path
-            ];
-        }
-        $this->_prefixPaths[$prefixPath] = $path;
+        $this->_fallbackPaths[] = $path;
     }
     
-    function setFallbackPath()
+    /**
+     * 批量设置备用目录
+     * 
+     * @param array $paths
+     */
+    function setFallbackPaths($paths)
     {
-        
+        $this->_fallbackPaths = array_merge($this->_fallbackPaths, $paths);
     }
     
 }
