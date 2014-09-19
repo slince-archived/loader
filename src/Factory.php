@@ -1,6 +1,6 @@
 <?php
 /**
- * slince cache component
+ * slince cache library
  * @author Taosikai <taosikai@yeah.net>
  */
 namespace Slince\Loader;
