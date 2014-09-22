@@ -15,13 +15,17 @@ class ClassMapLoader extends AbstractLoader
      */
     private $_classMap = [];
 
+    function __construct($map = [])
+    {
+        $this->_classMap = $map;
+    }
     /**
      * 设置映射
      *
      * @param string $class            
      * @param string $file            
      */
-    function setClassMapping($class, $file)
+    function setClassMap($class, $file)
     {
         $this->_classMap[$class] = $file;
     }
@@ -31,7 +35,7 @@ class ClassMapLoader extends AbstractLoader
      *
      * @param array $classMapping            
      */
-    function setClassMappings($classMapping)
+    function setClassMaps($classMapping)
     {
         $this->_classMap = array_merge($this->_classMap, $classMapping);
     }
