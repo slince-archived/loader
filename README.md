@@ -27,7 +27,9 @@
 
     $psr4Loader = new Slince\Loader\Psr4Loader();
     //设置命名空间与路径的映射
-    $psr4Loader->setPrefixPath('I\\Like\\To\\Read\\Book', './src/');
+    $psr4Loader->setPrefixPath('I\\Like\\To\\Read\\Book\\', './src/');
+
+    $phpBook = new I\Like\To\Read\Book\PhpBook();
    
 
 
