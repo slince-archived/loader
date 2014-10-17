@@ -30,7 +30,22 @@
     $psr4Loader->setPrefixPath('I\\Like\\To\\Read\\Book\\', './src/');
 
     $phpBook = new I\Like\To\Read\Book\PhpBook();
-   
+
+    //对应类文件位置 ./src/PhpBook.php
+
+psr4规范在设置映射时命名空间需要以"\\"结尾；
+
+psr0不需要结尾并且可以兼容psr4。
+
+如果你的项目有自己的规则，你也可以自定义一个加载器，但需要实现LoaderInterface接口;或者直接使用CustomLoader
+
+	$customLoader = new Slince\Loader\CustomLoader();
+	$customLoader->setCallback(function($class){
+		include 'file';
+	});
+	$loader->addLoader($customLoader);
+
+
 
 
 
