@@ -1,7 +1,7 @@
 <?php
 /**
  * slince class loader library
- * @author Taosikai <taosikai@yeah.net>
+ * @author Tao <taosikai@yeah.net>
  */
 namespace Slince\Loader\Exception;
 
